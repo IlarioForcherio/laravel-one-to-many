@@ -5,6 +5,8 @@ use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Model\Post;
 class PostSeeder extends Seeder
+
+//ciao
 {
     /**
      * Run the database seeds.
