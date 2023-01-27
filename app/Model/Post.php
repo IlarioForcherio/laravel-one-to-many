@@ -11,6 +11,21 @@ class Post extends Model
     protected $fillable = [
       'title',
       'body',
+      'category_id',
     ];
+
+    //relazione con la tabella categories
+    public function category(){
+        // relazione molti a uno
+        //una solca categoria associata
+        return $this->belongsTo('App\Model\Category');
+    }
+
+
+    public function tags(){
+        return $this->belongsToMany('App\Model\Tag');
+
+
+    }
 
 }

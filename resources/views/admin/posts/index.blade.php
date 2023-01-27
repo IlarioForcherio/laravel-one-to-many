@@ -17,9 +17,12 @@
    <div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">{{$item->title}}</h5>
-      <p class="card-text">{{$item->id}}</p>
-      <p class="card-text">{{$item->body}}</p>
+      <h5 class="card-title">titolo:{{$item->title}}</h5>
+      {{-- <p class="card-text">{{$item->id}}</p> --}}
+      <p class="card-text">{{$item->category['name']}}</p>
+      {{-- chiedere category--}}
+      <p class="card-text">category id {{$item->category_id}} </p>
+      <p class="card-text">body:{{$item->body}}</p>
       <a href="{{route('admin.posts.show', $item->id)}}" class="btn btn-primary ">Visualizza Post</a>
     </div>
   </div>

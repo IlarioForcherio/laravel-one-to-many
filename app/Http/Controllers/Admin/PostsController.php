@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use  App\Model\Category;
 use  App\Model\Post;
+use  App\Model\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,11 +16,18 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(3);
+
+
+           $posts = Post::with('category')->paginate(3);
+
+
+        //categories->nome della tabella
+
+        //$posts = Post::paginate(3);
         //con paginate crea delle pagine in caso in cui gli elementi siano tanti
         //funziona con il metodo links(), vedi index.blade.php
         //funziona solo importando l'ultima versione di bootstrap da cdn
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index',compact('posts') );    //compact('posts')
     }
 
     /**
@@ -26,9 +35,15 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Manda informazione a store
     public function create()
     {
-        return view('admin.posts.create');
+
+        $categories_create = Category::All();
+        $tags_create = Tag::All();
+
+        return view('admin.posts.create', compact('categories_create','tags_create'));
     }
 
     /**
@@ -53,6 +68,11 @@ class PostsController extends Controller
        //salvare sempre
        $new_post->save();
 
+       if( array_key_exist('tags', $data)  ){
+        //tags() e' la function tags che c'e' nel modello Post
+         $new_post->tags()->sync( $data['tags'] );
+       }
+
        return redirect()->route('admin.posts.index');
 
     }
@@ -76,10 +96,20 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //manda informazione a update
     public function edit($id)
     {
         $post_edit = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post_edit'));
+
+         $categories_edit = Category::All();
+
+         $tags_edit = Tag::All();
+
+
+        return view('admin.posts.edit', compact('post_edit','categories_edit','tags_edit'));
+
+
     }
 
     /**
@@ -108,6 +138,8 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post_destroy =  Post::findOrFail($id);
+
+
 
         $post_destroy->delete();
         //mi recupero l'id e con delete() effettuo effettivamente la modifica

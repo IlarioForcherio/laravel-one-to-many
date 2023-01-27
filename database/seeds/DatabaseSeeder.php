@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             [
               PostSeeder::class,
               CategorySeeder::class,
+              TagSeeder::class,
             ]
 
         );

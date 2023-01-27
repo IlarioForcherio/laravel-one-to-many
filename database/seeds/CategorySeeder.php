@@ -15,6 +15,7 @@ class CategorySeeder extends Seeder
             'Antipasti',
             'Primi',
             'Secondi',
+            'Contorni',
             'Dolci'
         ];
 
