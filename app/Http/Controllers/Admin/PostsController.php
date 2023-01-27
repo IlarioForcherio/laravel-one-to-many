@@ -16,9 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-
-
-           $posts = Post::with('category')->paginate(3);
+        $posts = Post::with('category')->paginate(3);
 
 
         //categories->nome della tabella

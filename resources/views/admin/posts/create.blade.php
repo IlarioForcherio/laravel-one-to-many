@@ -41,6 +41,7 @@
 
     @foreach($tags_create as $elem)
     <label for="">
+        //tags
         <input type="checkbox" name="tags[]" value="{{$elem->id}}">
         {{$elem->name}}
     </label>
